@@ -43,7 +43,20 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
-    public Iterable<Account> getAllAccountsByCustomer(@PathVariable Long customerId){
-        return accountRepository.findAllAccountsByCustomer(customerId);
+    public ResponseEntity<Iterable<Account>> getAllAccountsByCustomer(@PathVariable Long customerId){
+        Iterable<Account> accounts = accountRepository.findAllAccountsByCustomer(customerId);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateAccount(@PathVariable Long accountId, @RequestBody Account account){
+        Account a = accountRepository.save(account);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAccount(@PathVariable Long accountId){
+        accountRepository.delete(accountId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
