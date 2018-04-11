@@ -1,14 +1,30 @@
 package io.zipcoder;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.inject.Inject;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 //POJO-JOJO
+@Entity
 public abstract class Account {
 
-    public enum Type{CREDIT,CHECKINGS,SAVINGS}
-    private long id;
+    public enum Type {CREDIT, CHECKINGS, SAVINGS}
+
+    @Id
+    @GeneratedValue
+    @Column(name = "ACCOUNT_ID")
+    private Long id;
     private String nickName;
     private Integer rewards;
     private double balance;
-    private Account customer;
+    private Customer customer;
     /**
      * Id: Generated value assigned to the database
      * Type: An enum, when serialized prints out a string (savings,checkings,credit)
@@ -18,38 +34,11 @@ public abstract class Account {
      * Customer: Object linking to the associated account
      */
 
-    public static Account createAccount(Type accountType) {
-        switch (accountType){
-            //the parts in red are classes that need to be created that extend this class with their own
-            //overridden methods to display the account name
-            case CREDIT:
-                return new CreditAccount();
-            case CHECKINGS:
-                return new CheckingAccount();
-            case SAVINGS:
-                return new SavingAccount();
-        } throw new IllegalArgumentException("The Bank account type " + accountType + " is not recognized.");
-    }
-
-    @Override
-    public String toString(){
-        return this.nickName + " - " + this.id;
-    }
-
-    public Account customer(long id, String nickName, Integer rewards, double balance, Account customer) {
-        this.id = id;
-        this.nickName = nickName;
-        this.rewards = rewards;
-        this.balance = balance;
-        this.customer = customer;
-        return this.customer;
-    }
-
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,11 +66,11 @@ public abstract class Account {
         this.balance = balance;
     }
 
-    public Account getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Account customer) {
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 }
