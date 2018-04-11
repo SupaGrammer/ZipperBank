@@ -1,6 +1,6 @@
 package io.zipcoder.controllers;
 
-import io.zipcoder.Account;
+import io.zipcoder.DOAs.Account;
 import io.zipcoder.repos.AccountRepository;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -35,4 +35,12 @@ public class AccountController {
         httpHeaders.setLocation(newAccountUri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
+        Account account = accountRepository.findOne(accountId);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/")
 }
