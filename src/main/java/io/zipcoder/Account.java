@@ -3,7 +3,7 @@ package io.zipcoder;
 //POJO-JOJO
 public abstract class Account {
 
-    public enum Type{CURRENT,CREDIT,CHECKINGS,SAVINGS}
+    public enum Type{CREDIT,CHECKINGS,SAVINGS}
     private long id;
     private String nickName;
     private Integer rewards;
@@ -22,8 +22,6 @@ public abstract class Account {
         switch (accountType){
             //the parts in red are classes that need to be created that extend this class with their own
             //overridden methods to display the account name
-            case CURRENT:
-                return new CurrentAccount();
             case CREDIT:
                 return new CreditAccount();
             case CHECKINGS:
