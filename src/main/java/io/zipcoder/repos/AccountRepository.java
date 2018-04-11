@@ -1,6 +1,6 @@
 package io.zipcoder.repos;
 
-import io.zipcoder.DOAs.Account;
+import io.zipcoder.DAOs.Account;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

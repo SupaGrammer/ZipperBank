@@ -1,15 +1,23 @@
-package io.zipcoder.DOAs;
+package io.zipcoder.DAOs;
 
 
 
-import javax.persistence.Entity;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
 public class Customer {
+    @Id
+    @GeneratedValue
+    @Column(name = "CUSTOMER_ID")
     private Long id;
+    @Column(name = "FIRST_NAME")
     private String firstName;
+    @Column(name = "LAST_NAME")
     private String lastName;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CUSTOMER_ID")
     private Set<Address> addresses;
 
     public long getId() {

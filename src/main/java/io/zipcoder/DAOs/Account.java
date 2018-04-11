@@ -1,4 +1,4 @@
-package io.zipcoder.DOAs;
+package io.zipcoder.DAOs;
 
 import javax.persistence.*;
 
@@ -9,7 +9,7 @@ public class Account {
     @GeneratedValue
     @Column(name = "ACCOUNT_ID")
     private Long id;
-    @DiscriminatorColumn(name = "TYPE")
+    @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "TYPE")
     private enum Type {CREDIT, CHECKINGS, SAVINGS}
     @Column(name = "NICK_NAME")
     private String nickName;

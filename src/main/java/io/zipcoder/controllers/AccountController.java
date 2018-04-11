@@ -1,6 +1,6 @@
 package io.zipcoder.controllers;
 
-import io.zipcoder.DOAs.Account;
+import io.zipcoder.DAOs.Account;
 import io.zipcoder.repos.AccountRepository;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
