@@ -5,9 +5,6 @@ import javax.persistence.*;
 //POJO-JOJO
 @Entity
 public class Account {
-
-
-
     @Id
     @GeneratedValue
     @Column(name = "ACCOUNT_ID")
