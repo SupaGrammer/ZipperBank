@@ -7,17 +7,22 @@ import javax.persistence.Id;
 
 //POJO-JOJO
 @Entity
-public abstract class Account {
+public class Account {
 
-    public enum Type {CREDIT, CHECKINGS, SAVINGS}
+
 
     @Id
     @GeneratedValue
     @Column(name = "ACCOUNT_ID")
     private Long id;
+    private enum Type {CREDIT, CHECKINGS, SAVINGS}
+    @Column(name = "NICK_NAME")
     private String nickName;
+    @Column(name = "REWARDS")
     private Integer rewards;
+    @Column(name = "BALANCE")
     private double balance;
+    @Column(name = "CUSTOMER")
     private Customer customer;
     /**
      * Id: Generated value assigned to the database

@@ -23,7 +23,7 @@ public class AccountController {
         return new ResponseEntity<>(allAccounts, HttpStatus.OK);
     }
 
-    @RequestMapping(value="customers/{customerId}/accounts", method = RequestMethod.POST)
+    @RequestMapping(value="/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccount(@PathVariable int customerId, @RequestBody Account account) {
         account = accountRepository.save(account);
         URI newAccountUri = ServletUriComponentsBuilder
@@ -42,5 +42,8 @@ public class AccountController {
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
+    public Iterable<Account> getAllAccountsByCustomer(@PathVariable Long customerId){
+        return accountRepository.findAllAccountsByCustomer(customerId);
+    }
 }
