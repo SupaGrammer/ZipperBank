@@ -23,6 +23,18 @@ public class AccountController {
         return new ResponseEntity<>(allAccounts, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
+        Account account = accountRepository.findOne(accountId);
+        return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.GET)
+    public ResponseEntity<Iterable<Account>> getAllAccountsByCustomer(@PathVariable Long customerId){
+        Iterable<Account> accounts = accountRepository.findAllAccountsByCustomer(customerId);
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
     @RequestMapping(value="/customers/{customerId}/accounts", method = RequestMethod.POST)
     public ResponseEntity<?> createAccount(@PathVariable int customerId, @RequestBody Account account) {
         account = accountRepository.save(account);
@@ -34,18 +46,6 @@ public class AccountController {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setLocation(newAccountUri);
         return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
-    }
-
-    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getAccountByID(@PathVariable Long accountId){
-        Account account = accountRepository.findOne(accountId);
-        return new ResponseEntity<>(account, HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/customers/{customerId}/accounts", method = RequestMethod.POST)
-    public ResponseEntity<Iterable<Account>> getAllAccountsByCustomer(@PathVariable Long customerId){
-        Iterable<Account> accounts = accountRepository.findAllAccountsByCustomer(customerId);
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.PUT)

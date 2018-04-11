@@ -1,9 +1,6 @@
 package io.zipcoder.DOAs;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 //POJO-JOJO
 @Entity
@@ -15,6 +12,7 @@ public class Account {
     @GeneratedValue
     @Column(name = "ACCOUNT_ID")
     private Long id;
+    @DiscriminatorColumn(name = "TYPE")
     private enum Type {CREDIT, CHECKINGS, SAVINGS}
     @Column(name = "NICK_NAME")
     private String nickName;
